@@ -1,16 +1,46 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
-	<link rel="stylesheet" href="styles.css">
+  <title>Browser Information</title>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+
+  <div id="browser-info"></div> <!-- Required div element -->
+
+  <script>
+    // Get browser information using navigator object
+    var userAgent = navigator.userAgent;
+    var appName = navigator.appName;
+    var appVersion = navigator.appVersion;
+
+    var browserName = '';
+    var version = '';
+
+    // Detect browser name and version from userAgent string
+    if (userAgent.indexOf("Chrome") > -1 && userAgent.indexOf("Edge") === -1 && userAgent.indexOf("OPR") === -1) {
+      browserName = "Chrome";
+      version = userAgent.match(/Chrome\/([\d.]+)/)[1];
+    } else if (userAgent.indexOf("Firefox") > -1) {
+      browserName = "Firefox";
+      version = userAgent.match(/Firefox\/([\d.]+)/)[1];
+    } else if (userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") === -1) {
+      browserName = "Safari";
+      version = userAgent.match(/Version\/([\d.]+)/)[1];
+    } else if (userAgent.indexOf("Edge") > -1 || userAgent.indexOf("Edg") > -1) {
+      browserName = "Edge";
+      version = userAgent.match(/Edg\/([\d.]+)/)[1];
+    } else if (userAgent.indexOf("OPR") > -1) {
+      browserName = "Opera";
+      version = userAgent.match(/OPR\/([\d.]+)/)[1];
+    } else {
+      browserName = appName;
+      version = appVersion;
+    }
+
+    // Display the message inside the div with id browser-info
+    document.getElementById("browser-info").innerText = 
+      "You are using " + browserName + " version " + version;
+  </script>
 
 </body>
-
 </html>
